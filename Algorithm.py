@@ -19,8 +19,6 @@ from tensorflow.python.keras.layers import *
 from tensorflow.python.keras.models import *
 from tensorflow.python.keras.optimizers import *
 from tensorflow.python.keras import regularizers
-from sklearn.metrics import mean_squared_error
-from tensorflow.python.keras.models import load_model
 from tensorflow.python.keras.callbacks import EarlyStopping
 from tensorflow.python.keras import backend as K
 stop = EarlyStopping(monitor='val_loss',min_delta = 0.00000001,patience=30,verbose = 0)
@@ -85,6 +83,7 @@ for epoch in range(no_epochs):
     model.fit(train_X_3d,train_y_3d,batch_size =b_s, validation_split = 0.1,epochs=1,callbacks = [stop],verbose=1,shuffle = False)
     
     if epoch in update_epoch_set:
+        
         intermediate_output = model.predict(train_X_3d)
         
         intermediate_errors = np.abs(intermediate_output.flatten() - train_y_3d.flatten())
